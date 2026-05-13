@@ -8,7 +8,7 @@ The project is structured as a fully automated workflow. By executing the master
 ## Repository Structure
 The directory is organized to maintain a strict separation between data inputs, processing logic, and outputs:
 
-- [data/](https://github.com/agsantoro/SMIimplants/tree/main/data): source subsets of data required to perform each table or figure identified by this structure: {COUNTRY}_{FOLLOW-IP}_{SURVEY}_{MODULE}.rda
+- [data/](https://github.com/agsantoro/SMIimplants/tree/main/data): source subsets of data required to perform each table or figure.
 
 - [functions/](https://github.com/agsantoro/SMIimplants/tree/main/functions): R functions to prepare data.
 
