@@ -45,11 +45,11 @@ The scripts in this repository allow you to view the following tables and figure
 
 - [Figure 3](https://github.com/agsantoro/SMIimplants/blob/main/scripts/repo_fig_03.R): Replacement of contraceptives by Implants at each follow-up, and by country.
 
-- [Table 1](https://github.com/agsantoro/SMIimplantes/blob/main/scripts/repo_table01.R): Percentage of use of contraceptive methods by country and follow-up, at start and end of 24-month period prior to the survey.
+- [Table 1](https://github.com/agsantoro/SMIimplants/blob/main/scripts/repo_table_01.R): Percentage of use of contraceptive methods by country and follow-up, at start and end of 24-month period prior to the survey.
 
-- [Table 2](https://github.com/agsantoro/SMIimplantes/blob/main/repo_table02.R): Implant use by socioeconomic characteristics, follow-up and country
+- [Table 2](https://github.com/agsantoro/SMIimplants/blob/main/scripts/repo_table_02.R): Implant use by socioeconomic characteristics, follow-up and country
 
-- [Table 3](https://github.com/agsantoro/SMIimplantes/blob/main/repo_table03.R): Implant use by socioeconomic characteristics, follow-up. Pooled data.
+- [Table 3](https://github.com/agsantoro/SMIimplants/blob/main/scripts/repo_table_03.R): Implant use by socioeconomic characteristics, follow-up. Pooled data.
 
 ## Citation
 
