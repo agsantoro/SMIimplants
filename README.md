@@ -39,13 +39,13 @@ Note: The RUN_PROCESS.r script manages the sequential execution of all modular s
 
 The scripts in this repository allow you to view the following tables and figures, along with the procedures for generating the estimates they contain::
 
-- [Figure 1](https://github.com/agsantoro/SMIimplantes/blob/main/repo_fig01.R): Flowchart of eligibility for “women in need of contraception”.
+- [Figure 1](https://github.com/agsantoro/SMIimplantes/blob/main/scripts/repo_fig01.R): Flowchart of eligibility for “women in need of contraception”.
 
-- [Figure 2](https://github.com/agsantoro/SMIimplantes/blob/main/repo_fig02.R): Percentage of implant use as a contraceptive method in the 24 months prior to the survey, by month and country.
+- [Figure 2](https://github.com/agsantoro/SMIimplantes/blob/main/scripts/repo_fig02.R): Percentage of implant use as a contraceptive method in the 24 months prior to the survey, by month and country.
 
-- [Figure 3](https://github.com/agsantoro/SMIimplantes/blob/main/repo_fig03.R): Replacement of contraceptives by Implants at each follow-up, and by country.
+- [Figure 3](https://github.com/agsantoro/SMIimplantes/blob/main/scripts/repo_fig03.R): Replacement of contraceptives by Implants at each follow-up, and by country.
 
-- [Table 1](https://github.com/agsantoro/SMIimplantes/blob/main/repo_table01.R): Percentage of use of contraceptive methods by country and follow-up, at start and end of 24-month period prior to the survey.
+- [Table 1](https://github.com/agsantoro/SMIimplantes/blob/main/scripts/repo_table01.R): Percentage of use of contraceptive methods by country and follow-up, at start and end of 24-month period prior to the survey.
 
 - [Table 2](https://github.com/agsantoro/SMIimplantes/blob/main/repo_table02.R): Implant use by socioeconomic characteristics, follow-up and country
 
