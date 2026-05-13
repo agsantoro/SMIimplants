@@ -10,7 +10,12 @@ The directory is organized to maintain a strict separation between data inputs, 
 
 - [data/](https://github.com/agsantoro/SMIimplants/tree/main/data): source subsets of data required to perform each table or figure identified by this structure: {COUNTRY}_{FOLLOW-IP}_{SURVEY}_{MODULE}.rda
 
+- [functions/](https://github.com/agsantoro/SMIimplants/tree/main/functions): R functions to prepare data.
+
+- [scripts/](https://github.com/agsantoro/SMIimplants/tree/main/scripts): R scripts to display outputs.
+
 - [RUN_PROCESS.r](https://github.com/agsantoro/SMIimplantes/blob/main/RUN_PROCESS.R): the master execution script located in the root directory.
+
 
 ## Instructions for reproduction
 
@@ -22,7 +27,7 @@ To replicate the study results, follow the steps below:
 
 3. Install the required library dependencies.
 
-4. Run this command in R console:
+4. Run this command in R console to visualize tables and figures in popup windows.
 
 `
 source("RUN_PROCESS.r")
@@ -34,17 +39,17 @@ Note: The RUN_PROCESS.r script manages the sequential execution of all modular s
 
 The scripts in this repository allow you to view the following tables and figures, along with the procedures for generating the estimates they contain::
 
-- Figure 1: Flowchart of eligibility for “women in need of contraception”.
+- [Figure 1](https://github.com/agsantoro/SMIimplantes/blob/main/repo_fig01.R): Flowchart of eligibility for “women in need of contraception”.
 
-- Figure 2: Percentage of implant use as a contraceptive method in the 24 months prior to the survey, by month and country.
+- [Figure 2](https://github.com/agsantoro/SMIimplantes/blob/main/repo_fig02.R): Percentage of implant use as a contraceptive method in the 24 months prior to the survey, by month and country.
 
-- Figure 3: Replacement of contraceptives by Implants at each follow-up, and by country.
+- [Figure 3](https://github.com/agsantoro/SMIimplantes/blob/main/repo_fig03.R): Replacement of contraceptives by Implants at each follow-up, and by country.
 
-- Table 1: Percentage of use of contraceptive methods by country and follow-up, at start and end of 24-month period prior to the survey.
+- [Table 1](https://github.com/agsantoro/SMIimplantes/blob/main/repo_table01.R): Percentage of use of contraceptive methods by country and follow-up, at start and end of 24-month period prior to the survey.
 
-- Table 2: Implant use by socioeconomic characteristics, follow-up and country
+- [Table 2](https://github.com/agsantoro/SMIimplantes/blob/main/repo_table02.R): Implant use by socioeconomic characteristics, follow-up and country
 
-- Table 3: Implant use by socioeconomic characteristics, follow-up. Pooled data.
+- [Table 3](https://github.com/agsantoro/SMIimplantes/blob/main/repo_table03.R): Implant use by socioeconomic characteristics, follow-up. Pooled data.
 
 ## Citation
 
