@@ -14,7 +14,7 @@ The directory is organized to maintain a strict separation between data inputs, 
 
 - [scripts/](https://github.com/agsantoro/SMIimplants/tree/main/scripts): R scripts to display outputs.
 
-- [RUN_PROCESS.R](https://github.com/agsantoro/SMIimplantes/blob/main/RUN_PROCESS.R): the master execution script located in the root directory.
+- [RUN_PROCESS.R](https://github.com/agsantoro/SMIimplants/blob/main/RUN_PROCESS.R): the master execution script located in the root directory.
 
 
 ## Instructions for reproduction
