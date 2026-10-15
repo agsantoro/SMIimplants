@@ -80,7 +80,7 @@ table1Data = function(country, area) {
         FP_MONTH1_METHOD %in% 1:4      ~ "01. No method",
         FP_MONTH1_METHOD %in% 5:8      ~ "02. Non-implant modern methods",
         FP_MONTH1_METHOD == 9          ~ "03. Implant",
-        FP_MONTH24_METHOD == 18        ~ "02. Non-implant modern methods",
+        FP_MONTH1_METHOD == 18        ~ "02. Non-implant modern methods",
         FP_MONTH1_METHOD %in% 10:14    ~ "02. Non-implant modern methods",
         FP_MONTH1_METHOD %in% 15:17    ~ "04. Non-modern methods",
         FP_MONTH1_METHOD == 19         ~ "02. Non-implant modern methods",
@@ -135,9 +135,51 @@ table1Data = function(country, area) {
       endICH     = icEnd$ic_superior
     )
     
+    # Paired end-minus-start contrasts within each woman's retrospective history.
+    # Both endpoints use the same complete-pair denominator. These may differ
+    # from the marginal denominators in the original start/end columns.
+    comparisons = lapply(as.character(startEndMethod$method), function(category) {
+      pairedDesign = design
+      pairedDesign$variables$startIndicator = ifelse(
+        is.na(dataSMI$startMethod), NA_real_, as.numeric(dataSMI$startMethod == category)
+      )
+      pairedDesign$variables$endIndicator = ifelse(
+        is.na(dataSMI$endMethod), NA_real_, as.numeric(dataSMI$endMethod == category)
+      )
+      pairedDesign = subset(pairedDesign,
+                            !is.na(startIndicator) & !is.na(endIndicator))
+      nPairs = nrow(pairedDesign$variables)
+      df = survey::degf(pairedDesign)
+      if (nPairs == 0 || df <= 0) {
+        stop(glue("Insufficient paired observations/design degrees of freedom: {country}, {fup}"))
+      }
+      means = survey::svymean(~startIndicator + endIndicator, pairedDesign)
+      contrast = survey::svycontrast(means, c(startIndicator = -1, endIndicator = 1))
+      difference = as.numeric(stats::coef(contrast))
+      se = as.numeric(survey::SE(contrast))
+      # A zero estimated variance cannot support a regular Wald t test.
+      statistic = if (is.finite(se) && se > 0) difference / se else NA_real_
+      p = if (is.finite(statistic)) 2 * stats::pt(-abs(statistic), df = df) else NA_real_
+      margin = stats::qt(0.975, df = df) * se
+      data.frame(
+        method = category,
+        nPairs = nPairs,
+        pairedStart = as.numeric(stats::coef(means)[1]) * 100,
+        pairedEnd = as.numeric(stats::coef(means)[2]) * 100,
+        differencePP = difference * 100,
+        differenceSE = se * 100,
+        differenceLCL = (difference - margin) * 100,
+        differenceUCL = (difference + margin) * 100,
+        tStatistic = statistic,
+        designDF = df,
+        pValue = p,
+        testStatus = if (is.finite(statistic)) "estimated" else "zero variance; test undefined"
+      )
+    })
+    comparisons = do.call(rbind, comparisons)
+    startEndMethod = dplyr::left_join(startEndMethod, comparisons, by = "method")
     listaReturn[[fup]]$startEndMethod = startEndMethod
   }
   
   listaReturn
 }
-table1Data("HND", "ALL")

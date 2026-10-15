@@ -31,7 +31,7 @@ HND = map(
     "nEnd.Freq",
     "endValue.Freq",
     "endICL",
-    "endICH" 
+    "endICH", "nPairs", "pairedStart", "pairedEnd", "differencePP", "differenceSE", "differenceLCL", "differenceUCL", "tStatistic", "designDF", "pValue", "testStatus" 
   )
 
 MEX = map(
@@ -49,7 +49,7 @@ MEX = map(
     "nEnd.Freq",
     "endValue.Freq",
     "endICL",
-    "endICH" 
+    "endICH", "nPairs", "pairedStart", "pairedEnd", "differencePP", "differenceSE", "differenceLCL", "differenceUCL", "tStatistic", "designDF", "pValue", "testStatus" 
   )
 
 table1 = list(HND,MEX) %>% do.call(rbind, .)
