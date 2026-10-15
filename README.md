@@ -51,6 +51,28 @@ The scripts in this repository allow you to view the following tables and figure
 
 - [Table 3](https://github.com/agsantoro/SMIimplants/blob/main/scripts/repo_table_03.R): Implant use by socioeconomic characteristics, follow-up. Pooled data.
 
+## PLOS ONE figure exports
+
+Run the figure scripts from the repository root. Each script writes a single-page
+TIFF to `outputs/figures`: `Fig1.tiff`, `Fig2.tiff`, or `Fig3.tiff`.
+Set `SMI_FIGURE_DIR` to choose another output directory, for example:
+
+```r
+Sys.setenv(SMI_FIGURE_DIR = "outputs/figures/revision1")
+source("scripts/repo_fig_01.R")
+source("scripts/repo_fig_02.R")
+source("scripts/repo_fig_03.R")
+```
+
+Exports use 600 dpi, LZW compression, an opaque white RGB background, a width of
+7.5 inches, and Arial text of 8–12 points. Figure heights are 8.5, 4.5, and 8.5
+inches respectively. Captions belong in the manuscript, not in the image.
+Figure 1 uses base R grid graphics; Figures 2–3 use ggplot2. A Cairo-capable R
+installation and the Arial font are required. Existing survey calculations and
+source data are retained. Figure 3 uses fixed labels from the source method
+dictionary rather than an external translation service.
+See the [PLOS ONE figure requirements](https://journals.plos.org/plosone/s/figures).
+
 ## Citation
 
 If you utilize these materials in your research, please cite the original publication.

@@ -9,6 +9,7 @@ library(survey)
 
 # load functions
 source("functions/fig2Data.R")
+source("functions/exportFigure.R")
 
 # list to store data
 tablaImplantLines = list()
@@ -64,26 +65,27 @@ data$MONTH = rev(data$MONTH)
 
 # Create the faceted line plot
 plot = ggplot(data, aes(x = MONTH, y = VALUE, group = fup, color = fup)) +
-  geom_line() +
-  facet_grid(. ~ country) +  
+  geom_line(linewidth = 0.65) +
+  facet_grid(. ~ country, labeller = labeller(country = c("Honduras" = "Selected areas of\nHonduras", "Mexico (Chiapas)" = "Selected areas of\nChiapas, Mexico"))) +
   labs(
-    title = "Percentage of implant use as a contraceptive method in the 24 months prior to the survey, by month and country.",
-    x = "Month",
+    title = NULL,
+    x = "Month of retrospective reference period",
     y = "Percentage of implant use",
     color = "Follow-up"
   ) +
-  theme_minimal() +
+  theme_minimal(base_family = "Arial", base_size = 10) +
   theme(
-    plot.title = element_text(hjust = 0.5, face = "bold", size = 12), 
-    axis.text.y = element_text(size = 5),
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 12),
+    axis.text = element_text(size = 9, colour = "black"),
     panel.grid.minor = element_blank(),
     strip.text = element_text(face = "bold"),
     panel.spacing.y = unit(1, "cm"),
     panel.spacing = unit(1, "lines")
   ) +
-  scale_x_discrete(limits = as.character(1:24))
+  scale_x_continuous(breaks = c(1, 6, 12, 18, 24)) +
+  scale_color_manual(values = c("#333333", "#0072B2", "#D55E00")) +
+  theme(legend.position = "bottom", strip.text = element_text(size = 10, face = "bold"))
 
 # print
-windows()
-print(plot)
+exportFigure("Fig2.tiff", function() print(plot), height = 4.5)
 

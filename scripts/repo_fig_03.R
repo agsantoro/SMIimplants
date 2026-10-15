@@ -7,6 +7,7 @@ library(survey)
 
 # load functions
 source("functions/fig3Data.R")
+source("functions/exportFigure.R")
 source("functions/replacementData.R")
 
 # list to store data
@@ -35,7 +36,7 @@ tablaReemplazos = union_all(
 
 ##### GRAFICO 3 #####
 
-# preparing data 
+# preparing data
 tablaReemplazos$METHOD[tablaReemplazos$METHOD=="None of everything"] = "No method"
 tablaReemplazos$METHOD[tablaReemplazos$METHOD=="I am all in the rhythm"] = "Rhythm method"
 tablaReemplazos$METHOD[tablaReemplazos$METHOD=="Mã © all of breastfeeding amenorrhea (mela)"] = "Breastfeeding amenorrhea (mela)"
@@ -64,26 +65,30 @@ data$METHOD = str_replace_all(data$METHOD,"He refused to answer","She refused to
 data$METHOD = str_replace_all(data$METHOD,"sponge, spermicide","Sponge, spermicide")
 
 plot = ggplot(data, aes(x = VALUE, y = reorder(METHOD, VALUE))) +
-  geom_bar(stat = "identity", fill = "#2E86C1") +
-  geom_text(aes(label = sprintf("%.1f%%", VALUE), 
-                x = VALUE, 
-                hjust = ifelse(VALUE >= 0, -0.2, 1.2)), 
-            size = 3) +
-  facet_grid(country ~ FUP, scales = "free_y") +
-  theme_minimal() +
+  geom_col(position = "identity", fill = "#2E86C1") +
+  geom_text(aes(label = sprintf("%.1f%%", VALUE),
+                x = VALUE,
+                hjust = ifelse(VALUE >= 0, -0.2, 1.2)),
+            size = 8 / ggplot2::.pt, family = "Arial") +
+  facet_grid(country ~ FUP, scales = "free_y", labeller = labeller(country = c("Honduras" = "Selected areas of Honduras", "Chiapas" = "Selected areas of Chiapas, Mexico"))) +
+  theme_minimal(base_family = "Arial", base_size = 10) +
   theme(
-    axis.text.y = element_text(size = 9),
+    axis.text = element_text(size = 8, colour = "black"),
     panel.grid.minor = element_blank(),
     strip.text = element_text(face = "bold"),
     panel.spacing.y = unit(1,"cm")
   ) +
   labs(
-    x = "Value (%)",
-    y = "Method"
+    x = "Women initiating implant use (%)",
+    y = "Previous method or non-use"
   ) +
   # Extend x-axis to make room for labels
-  scale_x_continuous(expand = expansion(mult = c(0.1, 0.15)))
+  scale_x_continuous(limits = c(0, 125), breaks = c(0, 50, 100),
+                     expand = expansion(mult = c(0.02, 0))) +
+  geom_text(data = data.frame(country = "Chiapas",
+                             FUP = factor("3rd follow-up", levels = levels(data$FUP))),
+            aes(x = 55, y = "Injectables"), label = "Not surveyed",
+            inherit.aes = FALSE, family = "Arial", size = 9 / ggplot2::.pt)
 
-windows()
-print(plot)
+exportFigure("Fig3.tiff", function() print(plot), height = 8.5)
 

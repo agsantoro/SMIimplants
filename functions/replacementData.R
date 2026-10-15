@@ -30,10 +30,18 @@ replacementData = function (country, dataSet) {
     }
     
     # preparing data
-    metodos$METHOD = labelled::copy_labels_from(as.numeric(metodos$METHOD), resultadosImplante[["36M"]]$dataSMI$FP_MONTH10_METHOD)
-    metodos$METHOD = haven::as_factor(metodos$METHOD)
-    metodos$METHOD = iconv(as.character(metodos$METHOD), from = "utf-8", to="ISO-8859-1")
-    metodos$METHOD = as.character(polyglotr::google_translate(as.character(metodos$METHOD), "en","es"))
+    # Fixed labels from the source dictionary; no network translation required.
+    methodLabels = c(`-2` = "Refused to answer", `-1` = "Does not know",
+      `1` = "Birth", `2` = "Pregnancy", `3` = "Termination", `4` = "No method",
+      `5` = "Female sterilization", `6` = "Male sterilization", `7` = "IUD",
+      `8` = "Injectables", `9` = "Implant", `10` = "Pill", `11` = "Male condom",
+      `12` = "Female condom", `13` = "Diaphragm", `14` = "Sponge, spermicide",
+      `15` = "Lactational amenorrhea", `16` = "Rhythm method", `17` = "Withdrawal",
+      `18` = "Emergency contraception", `19` = "Other modern method",
+      `20` = "Other traditional method")
+    labels = unname(methodLabels[as.character(metodos$METHOD)])
+    if (anyNA(labels)) stop("Unmapped contraceptive method code")
+    metodos$METHOD = labels
     metodos$VALUE = round(metodos$VALUE, 2)
     metodos = cbind(country = country, area = area, metodos)
     
